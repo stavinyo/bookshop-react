@@ -1,0 +1,27 @@
+.book-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+.book-card {
+    max-width: 300px;
+    margin: 0.5em;
+    padding: 1em;
+    border-radius: 15px;
+    list-style: none;
+    background-color: var(--clr1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.book-card > * {
+    text-align: center;
+}
+
+@media (max-width: 720px) {
+    .book-list {
+        display: grid;
+        grid-template-columns: 300px;
+        justify-content: center;
+    }
+}

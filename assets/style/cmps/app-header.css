@@ -1,0 +1,19 @@
+.app-header {
+    background-color: var(--clr1);
+    color: var(--clr1bg);
+    padding: 1em;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.app-header a {
+    margin-inline: 2em;
+    font-family: 'Edu VIC WA NT Beginner', cursive;
+}
+
+@media (max-width: 720px) {
+    .app-header {
+        color: var(--clr2bg);
+    }
+}
