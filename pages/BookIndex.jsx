@@ -1,6 +1,6 @@
 const { useState, useEffect } = React
 
-// import { BookFilter } from '../cmps/BookFilter.jsx'
+import { BookFilter } from '../cmps/BookFilter.jsx'
 import { BookList } from '../cmps/BookList.jsx'
 import { bookService } from '../services/book.service.js'
 import { BookDetails } from './BookDetails.jsx'
@@ -10,8 +10,7 @@ export function BookIndex() {
     const [selectedBookId, setSelectedBookId] = useState(null)
 
     useEffect(() => {
-        const temp = bookService.query().then(setBooks)
-        console.log('temp', temp)
+        bookService.query().then(setBooks)
     }, [])
 
     function onSelectBookId(bookId) {
@@ -22,6 +21,7 @@ export function BookIndex() {
         <section className="book-index">
             {!selectedBookId && (
                 <React.Fragment>
+                    <BookFilter />
                     <BookList books={books} onSelectBookId={onSelectBookId} />
                 </React.Fragment>
             )}

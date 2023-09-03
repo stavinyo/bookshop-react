@@ -1,6 +1,6 @@
 import { BookPreview } from './BookPreview.jsx'
 
-export function BookList({ books }) {
+export function BookList({ books, onSelectBookId }) {
     console.log('books', books)
 
     return (
