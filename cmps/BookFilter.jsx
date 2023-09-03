@@ -1,28 +1,59 @@
 const { useState, useEffect } = React
 
-export function BookFilter() {
+export function BookFilter({ filterBy, onSetFilterBy }) {
+    console.log('filterBy', filterBy)
+    console.log('onSetFilterBy', onSetFilterBy)
+
+    const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
+
+    useEffect(() => {
+        onSetFilterBy(filterByToEdit)
+    }, [filterByToEdit])
+
+    function onSubmitFilter(ev) {
+        ev.preventDefault()
+        onSetFilterBy(filterByToEdit)
+    }
+
+    function handleChange({ target }) {
+        const field = target.name
+        let value = target.value
+
+        switch (target.type) {
+            case 'number':
+            case 'range':
+                value = +value || ''
+                break
+
+            default:
+                break
+        }
+        setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: value }))
+    }
+
+    const { txt, price } = filterBy
     return (
         <section>
             <h2>Filter Our Books</h2>
-            <form>
+            <form onSubmit={onSubmitFilter}>
                 <label htmlFor="txt">Title: </label>
                 <input
-                    // value={txt}
-                    // onChange={handleChange}
+                    value={txt}
+                    onChange={handleChange}
                     type="text"
                     placeholder="type book title..."
                     id="txt"
                     name="txt"
                 />
 
-                <label htmlFor="price">price: </label>
+                <label htmlFor="price">max price: </label>
                 <input
-                    // value={txt}
-                    // onChange={handleChange}
+                    value={price}
+                    onChange={handleChange}
                     type="number"
-                    placeholder="type book title..."
-                    id="txt"
-                    name="txt"
+                    placeholder="type book price..."
+                    id="price"
+                    name="price"
                 />
 
                 <button>Set Filter</button>

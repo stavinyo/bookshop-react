@@ -13,11 +13,23 @@ export const bookService = {
     getEmptyBook,
     getNextBookId,
     getFilterBy,
-    setFilterBy
+    setFilterBy,
+    getDefaultFilter
 }
 
-function query() {
-    return storageService.query(BOOK_KEY).then(watchers => watchers)
+function query(filterBy = {}) {
+    return storageService.query(BOOK_KEY)
+        .then(books => {
+            if (filterBy.txt) {
+                const regExp = new RegExp(filterBy.txt, 'i')
+                books = books.filter(book => regExp.test(book.txt))
+            }
+            if (filterBy.price) {
+                books = books.filter(book => book.listPrice.amount <= filterBy.price)
+            }
+
+            return books
+        })
 }
 
 function get(bookId) {
@@ -65,7 +77,7 @@ function _createBooks() {
                 "title": "metus hendrerit",
                 "subtitle": "mi est eros convallis auctor arcu dapibus himenaeos",
                 "authors": [
-                    "Barbara Cartland"
+                    "Barbara Booktland"
                 ],
                 "publishedDate": 1999,
                 "description": "placerat nisi sodales suscipit tellus tincidunt mauris elit sit luctus interdum ad dictum platea vehicula conubia fermentum habitasse congue suspendisse",
@@ -87,7 +99,7 @@ function _createBooks() {
                 "title": "morbi",
                 "subtitle": "lorem euismod dictumst inceptos mi",
                 "authors": [
-                    "Barbara Cartland"
+                    "Barbara Booktland"
                 ],
                 "publishedDate": 1978,
                 "description": "aliquam pretium lorem laoreet etiam odio cubilia iaculis placerat aliquam tempor nisl auctor",
@@ -514,6 +526,11 @@ function _createBooks() {
 function getEmptyBook(id = utilService.makeId(), title = '', amount = 0, thumbnail) {
     return { id, title, amount, thumbnail }
 }
+
+function getDefaultFilter() {
+    return { txt: '', price: '' }
+}
+
 
 // function _createBook(title, listPrice = 100) {
 //     const book = getEmptyBook(title, listPrice)
