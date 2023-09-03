@@ -5,7 +5,7 @@ import { BookIndex } from './pages/BookIndex.jsx'
 import { HomePage } from './pages/HomePage.jsx'
 
 export function App() {
-    const [page, setPage] = useState('Home')
+    const [page, setPage] = useState('Books')
 
     return (
         <section className="app">
