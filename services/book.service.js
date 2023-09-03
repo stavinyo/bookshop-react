@@ -22,7 +22,7 @@ function query(filterBy = {}) {
         .then(books => {
             if (filterBy.txt) {
                 const regExp = new RegExp(filterBy.txt, 'i')
-                books = books.filter(book => regExp.test(book.txt))
+                books = books.filter(book => regExp.test(book.title))
             }
             if (filterBy.price) {
                 books = books.filter(book => book.listPrice.amount <= filterBy.price)
