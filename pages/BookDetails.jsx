@@ -16,8 +16,7 @@ export function BookDetails({ onBack, bookId }) {
     }
 
     function getPublishedDate() {
-        if (new Date().getFullYear() - new Date(book.publishedDate).getFullYear() > 20)
-            return 'Vintage'
+        if (new Date().getFullYear() - new Date(book.publishedDate).getFullYear() > 20) return 'Vintage'
         else return 'New'
     }
 
