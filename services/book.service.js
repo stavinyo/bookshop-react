@@ -523,8 +523,23 @@ function _createBooks() {
     }
 }
 
-function getEmptyBook(id = utilService.makeId(), title = '', amount = 0, thumbnail) {
-    return { id, title, amount, thumbnail }
+function getEmptyBook(title = '', amount = 0) {
+    return {
+        title,
+        "subtitle": "",
+        "authors": [],
+        "publishedDate": "",
+        "description": "",
+        "pageCount": "",
+        "categories": [],
+        "thumbnail": "",
+        "language": "en",
+        "listPrice": {
+            amount,
+            "currencyCode": "EUR",
+            "isOnSale": false
+        }
+    }
 }
 
 function getDefaultFilter() {

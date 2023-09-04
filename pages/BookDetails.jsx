@@ -8,7 +8,7 @@ export function BookDetails() {
     const params = useParams()
 
     useEffect(() => {
-        console.log('params.bookId', params.bookId)
+        // console.log('params.bookId', params.bookId)
         bookService.get(params.bookId).then(setBook)
     }, [])
 
