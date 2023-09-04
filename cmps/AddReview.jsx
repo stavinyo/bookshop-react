@@ -1,9 +1,10 @@
 import { bookService } from '../services/book.service.js'
+import { ReviewList } from './ReviewList.jsx'
 
 const { useState } = React
 const { useNavigate, useParams } = ReactRouterDOM
 
-export function AddReview() {
+export function AddReview({ reviews }) {
     const [bookReview, setBookReview] = useState(bookService.getEmptyReview())
     const { bookId } = useParams()
     const navigate = useNavigate()
@@ -28,7 +29,7 @@ export function AddReview() {
         console.log('ev', ev)
         ev.preventDefault()
         bookService
-            .addReview(bookId, review)
+            .addReview(bookId, bookReview)
             .then(() => {
                 navigate(`/book/${bookId}`)
             })
@@ -39,33 +40,36 @@ export function AddReview() {
 
     const { fullName, rate, date } = bookReview
     return (
-        <form onSubmit={onSubmitReview}>
-            <label htmlFor="fullName">Full Name:</label>
-            <input
-                onChange={handleChange}
-                value={fullName}
-                type="text"
-                name="fullName"
-                id="fullName"
-                required
-            />
+        <div>
+            <form onSubmit={onSubmitReview}>
+                <label htmlFor="fullName">Full Name:</label>
+                <input
+                    onChange={handleChange}
+                    value={fullName}
+                    type="text"
+                    name="fullName"
+                    id="fullName"
+                    required
+                />
 
-            <label htmlFor="rate">Rating:</label>
-            <input
-                onChange={handleChange}
-                value={rate}
-                type="number"
-                name="rate"
-                id="rate"
-                min="0"
-                max="5"
-                required
-            />
+                <label htmlFor="rate">Rating:</label>
+                <input
+                    onChange={handleChange}
+                    value={rate}
+                    type="number"
+                    name="rate"
+                    id="rate"
+                    min="0"
+                    max="5"
+                    required
+                />
 
-            <label htmlFor="date">Read At:</label>
-            <input onChange={handleChange} value={date} type="date" name="date" id="date" required />
+                <label htmlFor="date">Read At:</label>
+                <input onChange={handleChange} value={date} type="date" name="date" id="date" required />
 
-            <button>Save review</button>
-        </form>
+                <button>Save review</button>
+            </form>
+            <ReviewList reviews={reviews} />
+        </div>
     )
 }

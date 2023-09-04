@@ -1,6 +1,5 @@
 import { utilService } from './util.service.js'
 import { storageService } from './async-storage.service.js'
-import { func } from 'prop-types'
 
 const BOOK_KEY = 'bookDB'
 var gFilterBy = { txt: '', minSpeed: 0 }
@@ -17,7 +16,8 @@ export const bookService = {
     setFilterBy,
     getDefaultFilter,
     addReview,
-    getEmptyReview
+    getEmptyReview,
+    getReviews,
 }
 
 function query(filterBy = {}) {
@@ -563,10 +563,19 @@ function addReview(bookId, review) {
         })
 }
 
+
+
 function getEmptyReview() {
     return { 'fullName': '', 'rate': '', 'date': new Date() }
 }
 
+function getReviews(bookId) {
+    return storageService.query(BOOK_KEY)
+        .then(books => {
+            const book = books.find(book => book.id === bookId)
+            return book ? book.reviews || [] : []
+        })
+}
 
 
 

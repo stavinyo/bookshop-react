@@ -6,12 +6,13 @@ const { useParams, useNavigate, Link } = ReactRouterDOM
 
 export function BookDetails() {
     const [book, setBook] = useState(null)
+    const [reviews, setReviews] = useState([])
     const params = useParams()
 
     useEffect(() => {
-        // console.log('params.bookId', params.bookId)
         bookService.get(params.bookId).then(setBook)
-    }, [])
+        bookService.getReviews(params.bookId).then(setReviews)
+    }, [params.bookId])
 
     function getPages() {
         if (book.pageCount < 100) return 'Light Reading'
@@ -42,7 +43,7 @@ export function BookDetails() {
             <button>
                 <Link to="/book">Back</Link>
             </button>
-            <AddReview />
+            <AddReview reviews={reviews} />
         </section>
     )
 }

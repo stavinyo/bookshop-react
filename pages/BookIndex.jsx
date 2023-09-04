@@ -22,7 +22,7 @@ export function BookIndex() {
     function onRemoveBook(bookId) {
         bookService.remove(bookId).then(() => {
             setBooks((prevBooks) => prevBooks.filter((book) => book.id !== bookId))
-            showSuccessMsg('Book Remove!')
+            showSuccessMsg('Book Remove! ')
         })
     }
 
