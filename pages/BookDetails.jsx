@@ -6,19 +6,16 @@ export function BookDetails({ onBack, bookId }) {
     const [book, setBook] = useState(null)
 
     useEffect(() => {
-        bookService.get(bookId).then((book) => {
-            console.log('book', book)
-            setBook(book)
-        })
+        bookService.get(bookId).then(setBook)
     }, [])
 
-    function dynPages() {
+    function getPages() {
         if (book.pageCount < 100) return 'Light Reading'
         else if (book.pageCount > 200 && book.pageCount < 500) return 'Descent Reading'
         else return 'Serious Reading'
     }
 
-    function dynPublishedDate() {
+    function getPublishedDate() {
         if (new Date().getFullYear() - new Date(book.publishedDate).getFullYear() > 20)
             return 'Vintage'
         else return 'New'
@@ -29,12 +26,15 @@ export function BookDetails({ onBack, bookId }) {
         <section className="book-details">
             <h1>Title: {book.title}</h1>
             <h3>Subtitle: {book.subtitle}</h3>
+            <h3>Authors: {book.authors.join(', ')}</h3>
             <h3>
-                Publishing: {book.publishedDate} ({dynPublishedDate()})
+                Publishing: {book.publishedDate} ({getPublishedDate()})
             </h3>
-            <h5>
-                PageCount: {book.pageCount} ({dynPages()})
-            </h5>
+            <h3>Categories: {book.categories.join(', ')}</h3>
+            <h3>
+                PageCount: {book.pageCount} ({getPages()})
+            </h3>
+            {book.listPrice.isOnSale && <h3>On Sale</h3>}
             <p>Description: {book.description}</p>
             <button onClick={onBack}>Back</button>
         </section>
