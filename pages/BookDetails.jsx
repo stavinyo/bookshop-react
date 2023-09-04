@@ -1,4 +1,5 @@
 import { bookService } from '../services/book.service.js'
+import { AddReview } from '../cmps/AddReview.jsx'
 
 const { useState, useEffect } = React
 const { useParams, useNavigate, Link } = ReactRouterDOM
@@ -19,7 +20,7 @@ export function BookDetails() {
     }
 
     function getPublishedDate() {
-        if (new Date().getFullYear() - new Date(book.publishedDate).getFullYear() > 20) return 'Vintage'
+        if (new Date().getFullYear() - new Date(book.publishedDate).getFullYear() > 10) return 'Vintage'
         else return 'New'
     }
 
@@ -41,6 +42,7 @@ export function BookDetails() {
             <button>
                 <Link to="/book">Back</Link>
             </button>
+            <AddReview />
         </section>
     )
 }

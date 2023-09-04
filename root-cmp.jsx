@@ -13,7 +13,6 @@ export function App() {
         <Router>
             <section className="app">
                 <AppHeader />
-
                 <main className="container">
                     <Routes>
                         <Route path="/" element={<HomePage />} />
