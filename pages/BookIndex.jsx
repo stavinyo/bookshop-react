@@ -13,8 +13,9 @@ export function BookIndex() {
         bookService.query(filterBy).then(setBooks)
     }, [filterBy])
 
-    function onSelectBookId(bookId) {
-        setSelectedBookId(bookId)
+    function onSetFilterBy(filterBy) {
+        console.log('filterBy', filterBy)
+        setFilterBy((prevFilter) => ({ ...prevFilter, ...filterBy }))
     }
 
     function onRemoveBook(bookId) {
@@ -23,9 +24,8 @@ export function BookIndex() {
         })
     }
 
-    function onSetFilterBy(filterBy) {
-        console.log('filterBy', filterBy)
-        setFilterBy((prevFilter) => ({ ...prevFilter, ...filterBy }))
+    function onSelectBookId(bookId) {
+        setSelectedBookId(bookId)
     }
 
     return (
