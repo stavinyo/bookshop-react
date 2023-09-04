@@ -1,12 +1,15 @@
 import { bookService } from '../services/book.service.js'
 
 const { useState, useEffect } = React
+const { useParams, useNavigate, Link } = ReactRouterDOM
 
-export function BookDetails({ onBack, bookId }) {
+export function BookDetails() {
     const [book, setBook] = useState(null)
+    const params = useParams()
 
     useEffect(() => {
-        bookService.get(bookId).then(setBook)
+        console.log('params.bookId', params.bookId)
+        bookService.get(params.bookId).then(setBook)
     }, [])
 
     function getPages() {
@@ -35,7 +38,9 @@ export function BookDetails({ onBack, bookId }) {
             </h3>
             {book.listPrice.isOnSale && <h3>On Sale</h3>}
             <p>Description: {book.description}</p>
-            <button onClick={onBack}>Back</button>
+            <button>
+                <Link to="/book">Back</Link>
+            </button>
         </section>
     )
 }

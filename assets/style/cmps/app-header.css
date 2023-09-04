@@ -7,6 +7,12 @@
     align-items: center;
     flex-direction: column;
 }
+.app-header h1 {
+    text-align: center;
+    color: black;
+    font-size: 2em;
+}
+
 .app-header a {
     margin-inline: 2em;
     font-family: 'Edu VIC WA NT Beginner', cursive;

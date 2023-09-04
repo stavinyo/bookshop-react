@@ -1,6 +1,6 @@
 .book-list {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
 }
 
 .book-card {
@@ -9,7 +9,7 @@
     align-items: center;
     justify-self: center;
 
-    max-width: 300px;
+    max-width: 350px;
     margin: 0.5em;
     padding: 1em;
     border-radius: 15px;

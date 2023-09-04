@@ -55,8 +55,6 @@ export function BookFilter({ filterBy, onSetFilterBy }) {
                     id="price"
                     name="price"
                 />
-
-                <button>Set Filter</button>
             </form>
         </section>
     )

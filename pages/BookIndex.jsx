@@ -1,12 +1,12 @@
 const { useState, useEffect } = React
+const { Link } = ReactRouterDOM
+
 import { BookFilter } from '../cmps/BookFilter.jsx'
 import { BookList } from '../cmps/BookList.jsx'
 import { bookService } from '../services/book.service.js'
-import { BookDetails } from './BookDetails.jsx'
 
 export function BookIndex() {
     const [books, setBooks] = useState([])
-    const [selectedBookId, setSelectedBookId] = useState(null)
     const [filterBy, setFilterBy] = useState(bookService.getDefaultFilter())
 
     useEffect(() => {
@@ -24,25 +24,13 @@ export function BookIndex() {
         })
     }
 
-    function onSelectBookId(bookId) {
-        setSelectedBookId(bookId)
-    }
-
     return (
         <section className="book-index">
-            {!selectedBookId && (
-                <React.Fragment>
-                    <BookFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
-                    <BookList
-                        books={books}
-                        onSelectBookId={onSelectBookId}
-                        onRemoveBook={onRemoveBook}
-                    />
-                </React.Fragment>
-            )}
-            {selectedBookId && (
-                <BookDetails onBack={() => onSelectBookId(null)} bookId={selectedBookId} />
-            )}
+            <BookFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
+            <button class="btn-add-book">
+                <Link to="/book/edit">add Book</Link>
+            </button>
+            <BookList books={books} onRemoveBook={onRemoveBook} />
         </section>
     )
 }
