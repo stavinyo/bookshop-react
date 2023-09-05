@@ -36,6 +36,7 @@ export function BookDetails() {
     return (
         <section className="book-details">
             <h1>Title: {book.title}</h1>
+            <img src={book.thumbnail} alt={book.thumbnail} />
             <h3>Subtitle: {book.subtitle}</h3>
             <h3>Authors: {book.authors.join(', ')}</h3>
             <h3>
@@ -49,6 +50,12 @@ export function BookDetails() {
             <p>Description: {book.description}</p>
             <button>
                 <Link to="/book">Back</Link>
+            </button>
+            <button>
+                <Link to={`/book/${book.prevBookId}`}>Prev book</Link>
+            </button>
+            <button>
+                <Link to={`/book/${book.nextBookId}`}>Next book</Link>
             </button>
             <AddReview onAddReview={onAddReview} />
 
