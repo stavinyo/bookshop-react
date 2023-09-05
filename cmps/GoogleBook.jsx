@@ -4,18 +4,11 @@ import { utilService } from '../services/util.service.js'
 import { GoogleBookList } from './GoogleBookList.jsx'
 const { useState, useEffect } = React
 
-export function GoogleBook() {
+export function GoogleBook({ onAddBookToStore }) {
     const [searchGoogleBook, setSearchGoogleBook] = useState('')
-    const [googleBook, setGoogleBook] = useState()
-    const [addBookToStore, setAddBookToStore] = useState()
+    const [googleBook, setGoogleBook] = useState([])
 
-    useEffect(() => {
-        console.log(googleBook)
-    }, [googleBook])
-
-    useEffect(() => {
-        console.log(addBookToStore)
-    }, [addBookToStore])
+    useEffect(() => {}, [googleBook])
 
     function onAddBook(book) {
         const reFormatBook = {
@@ -36,7 +29,7 @@ export function GoogleBook() {
         }
 
         bookService.save(reFormatBook).then(() => {
-            setAddBookToStore()
+            onAddBookToStore(reFormatBook)
             showSuccessMsg('Book Save!')
         })
     }

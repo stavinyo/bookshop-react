@@ -16,8 +16,11 @@ export function BookIndex() {
     }, [filterBy])
 
     function onSetFilterBy(filterBy) {
-        console.log('filterBy', filterBy)
         setFilterBy((prevFilter) => ({ ...prevFilter, ...filterBy }))
+    }
+
+    function onAddBookToStore(book) {
+        setBooks((prevBooks) => [...prevBooks, book])
     }
 
     function onRemoveBook(bookId) {
@@ -29,7 +32,7 @@ export function BookIndex() {
 
     return (
         <section className="book-index">
-            <GoogleBook />
+            <GoogleBook onAddBookToStore={onAddBookToStore} />
             <BookFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
             <button className="btn-add-book">
                 <Link to="/book/edit">add Book</Link>
