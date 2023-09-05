@@ -1,5 +1,5 @@
 const Router = ReactRouterDOM.HashRouter
-const { Routes, Route, Navigate } = ReactRouterDOM
+const { Routes, Route } = ReactRouterDOM
 
 import { AppHeader } from './cmps/AppHeader.jsx'
 import { BookEdit } from './cmps/BookEdit.jsx'
@@ -13,6 +13,7 @@ export function App() {
         <Router>
             <section className="app">
                 <AppHeader />
+
                 <main className="container">
                     <Routes>
                         <Route path="/" element={<HomePage />} />

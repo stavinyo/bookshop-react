@@ -1,17 +1,16 @@
 import { bookService } from '../services/book.service.js'
 import { AddReview } from '../cmps/AddReview.jsx'
+import { ReviewList } from '../cmps/ReviewList.jsx'
 
 const { useState, useEffect } = React
-const { useParams, useNavigate, Link } = ReactRouterDOM
+const { useParams, Link } = ReactRouterDOM
 
 export function BookDetails() {
     const [book, setBook] = useState(null)
-    const [reviews, setReviews] = useState([])
     const params = useParams()
 
     useEffect(() => {
         bookService.get(params.bookId).then(setBook)
-        bookService.getReviews(params.bookId).then(setReviews)
     }, [params.bookId])
 
     function getPages() {
@@ -23,6 +22,14 @@ export function BookDetails() {
     function getPublishedDate() {
         if (new Date().getFullYear() - new Date(book.publishedDate).getFullYear() > 10) return 'Vintage'
         else return 'New'
+    }
+
+    function onAddReview(bookReview) {
+        bookService.addReview(params.bookId, bookReview).then(setBook)
+    }
+
+    function onDeleteReview(reviewId) {
+        bookService.deleteReview(params.bookId, reviewId).then(setBook)
     }
 
     if (!book) return <div>Loading...</div>
@@ -43,7 +50,9 @@ export function BookDetails() {
             <button>
                 <Link to="/book">Back</Link>
             </button>
-            <AddReview reviews={reviews} />
+            <AddReview onAddReview={onAddReview} />
+
+            <ReviewList reviews={book.reviews} onDeleteReview={onDeleteReview} />
         </section>
     )
 }

@@ -1,13 +1,9 @@
 import { bookService } from '../services/book.service.js'
-import { ReviewList } from './ReviewList.jsx'
 
 const { useState } = React
-const { useNavigate, useParams } = ReactRouterDOM
 
-export function AddReview({ reviews }) {
+export function AddReview({ onAddReview }) {
     const [bookReview, setBookReview] = useState(bookService.getEmptyReview())
-    const { bookId } = useParams()
-    const navigate = useNavigate()
 
     function handleChange({ target }) {
         const field = target.name
@@ -27,15 +23,8 @@ export function AddReview({ reviews }) {
 
     function onSubmitReview(ev) {
         console.log('ev', ev)
-        ev.preventDefault()
-        bookService
-            .addReview(bookId, bookReview)
-            .then(() => {
-                navigate(`/book/${bookId}`)
-            })
-            .catch((error) => {
-                console.error('Error adding review:', error)
-            })
+        ev.preventDefault(bookReview)
+        onAddReview(bookReview)
     }
 
     const { fullName, rate, date } = bookReview
@@ -69,7 +58,6 @@ export function AddReview({ reviews }) {
 
                 <button>Save review</button>
             </form>
-            <ReviewList reviews={reviews} />
         </div>
     )
 }

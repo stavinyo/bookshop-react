@@ -15,6 +15,7 @@ export function UserMsg() {
     function onClose() {
         setMsg(null)
     }
+
     if (!msg) return
     return (
         <section className={'user-msg ' + msg.type}>
