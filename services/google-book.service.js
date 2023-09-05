@@ -16,6 +16,7 @@ function getGoogleBook(value) {
                 const img = (book.volumeInfo.imageLinks) ? book.volumeInfo.imageLinks.thumbnail : ''
                 console.log(img)
                 return {
+                    id: utilService.makeId(),
                     title: book.volumeInfo.title || '',
                     subtitle: book.volumeInfo.subtitle || '',
                     authors: book.volumeInfo.authors || [],

@@ -22,6 +22,28 @@
     text-align: center;
 }
 
+.google-book-list {
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    list-style: none;
+}
+
+.google-book-li .book-info {
+    display: flex;
+    align-items: center;
+    padding: 2px;
+    border-bottom: 1px solid black;
+}
+
+.google-book-li h1 {
+    margin-right: 10px;
+}
+
+.book-info > button {
+    margin-inline-start: auto;
+}
+
 @media (max-width: 720px) {
     .book-list {
         display: grid;
