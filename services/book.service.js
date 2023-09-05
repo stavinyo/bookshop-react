@@ -592,3 +592,4 @@ function _setNextPrevBookId(book) {
         return book
     })
 }
+
